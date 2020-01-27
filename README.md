@@ -1,10 +1,12 @@
 # gblstack
-A dockerized development stack for the Northwestern University Library Repository Development & Administration Team
+A dockerized development stack for GeoBlacklight.
+
+Adapted from Northwestern University Library's [devstack project](https://github.com/nulib/devstack).
 
 ## Setup
 
 ```bash
-$ git clone git@github.com:nulib/gblstack.git
+$ git clone git@github.com:geoblacklight/gblstack.git
 $ cd gblstack
 # the next command might require sudo depending on your homebrew setup
 $ bin/gblstack link
@@ -17,9 +19,9 @@ all of the same subcommands, parameters, and arguments, with a few notable enhan
 
 * The `update` command will update the gblstack command and configs in place.
 * `docker-compose` commands that accept service names as arguments can also accept application names
-  (`arch`, `avalon`, `donut`, and/or `glaze`) that will be expanded to the list of services those
-  applications depend on. For example, `gblstack up donut glaze` will bring up all services required
-  to run both DONUT and Glaze.
+  (`web`, `solr`, `db`) that will be expanded to the list of services those
+  applications depend on. For example, `gblstack up web` will bring up all services required
+  to run the blacklight web server.
 
 ### Cheat Sheet
 
@@ -45,8 +47,3 @@ all of the same subcommands, parameters, and arguments, with a few notable enhan
 * It’s a good idea to run `docker system prune` once in a while to get rid of stopped containers, dangling
   images, and unused networks & volumes. If you run it while the stack is up, it won’t remove your current
   set of data volumes (because they'll be in use).
-
-## Known Issues
-
-* Application names will always expand to the list of their dependent services. So `gblstack up donut glaze`
-  followed by `gblstack stop glaze` will stop all of Glaze's dependencies, even those DONUT might still need.
