@@ -6,10 +6,10 @@ Adapted from Northwestern University Library's [devstack project](https://github
 ## Setup
 
 ```bash
-$ git clone git@github.com:geoblacklight/gblstack.git
+$ git clone https://github.com/geoblacklight/gblstack.git
 $ cd gblstack
-# the next command might require sudo depending on your homebrew setup
-$ bin/gblstack link
+$ echo "export PATH=\$PATH:$(pwd)/bin" >> ~/.profile
+$ source ~/.profile
 ```
 
 ## Use
