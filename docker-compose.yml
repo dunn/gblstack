@@ -6,7 +6,7 @@ volumes:
   html:
 services:
   web:
-    build: ./dockerfiles/rails/
+    image: geoblacklight/gblstack_web:1.0.0
     depends_on:
       - lsyncd
     ports:
