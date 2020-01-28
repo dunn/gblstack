@@ -6,7 +6,7 @@ volumes:
   html:
 services:
   web:
-    image: geoblacklight/gblstack_web:1.0.0
+    image: geoblacklight/gblstack_web
     depends_on:
       - lsyncd
     ports:
