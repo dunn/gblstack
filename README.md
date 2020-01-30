@@ -8,6 +8,12 @@ Adapted from Northwestern University Library's [devstack project](https://github
 ```bash
 $ git clone https://github.com/geoblacklight/gblstack.git
 $ cd gblstack
+
+# On MacOS
+$ echo "export PATH=\$PATH:$(pwd)/bin" >> ~/.bash_profile
+$ source ~/.bash_profile
+
+# On Linux
 $ echo "export PATH=\$PATH:$(pwd)/bin" >> ~/.profile
 $ source ~/.profile
 ```
