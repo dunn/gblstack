@@ -17,8 +17,8 @@ services:
       - RAILS_ENV=development
       - SOLR_URL="http://solr:8983/solr/blacklight-core"
     volumes:
-      - html:/usr/src/app
-    command: bash -c "rm -f tmp/pids/server.pid && bundle install && bundle exec rake db:migrate && bundle exec rails s -p 3000 -b '0.0.0.0'"
+      - html:/home/geoblacklight/app
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle install && yarn install && bundle exec rake db:migrate && bundle exec rails s -p 3000 -b '0.0.0.0'"
   db:
     image: postgres:10-alpine
     read_only: true

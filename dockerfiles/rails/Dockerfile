@@ -1,20 +1,30 @@
-FROM ruby:2.5.7
+FROM ruby:2.6-alpine
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        postgresql-client \
-        sqlite3 \
-        libxml2-dev libxslt1-dev \
-        nodejs \
-        npm \
-        yarn \
-    && rm -rf /var/lib/apt/lists/*
+RUN uname -a
+RUN echo 'http://mirror.leaseweb.com/alpine/latest-stable/main' > /etc/apk/repositories; \
+    echo 'http://mirror.leaseweb.com/alpine/latest-stable/community' >> /etc/apk/repositories
+RUN cat /etc/apk/repositories
 
-WORKDIR /usr/src/app
-RUN git clone https://github.com/geoblacklight/workshop-app.git .
-RUN bundle install
+RUN apk --no-cache upgrade && \
+  apk add --no-cache \
+  build-base \
+  curl \
+  git \
+  libxml2-dev \
+  libxslt-dev \
+  nodejs-current \
+  postgresql-dev \
+  sqlite-dev \
+  tzdata \
+  yarn
+
+RUN mkdir -p /home/geoblacklight/app
+WORKDIR /home/geoblacklight/app
+
+RUN git clone https://github.com/geoblacklight/workshop-app-2020.git .
+
+RUN gem update bundler
+RUN bundle check || bundle install --jobs "$(nproc)"
 RUN yarn install
 
 EXPOSE 3000
